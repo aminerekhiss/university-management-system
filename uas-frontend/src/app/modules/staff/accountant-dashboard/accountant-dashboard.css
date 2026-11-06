@@ -1,0 +1,111 @@
+/* ============================
+   CONTAINER
+============================ */
+.accountant-container {
+  padding: 50px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.page-title {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+/* ============================
+   KPI GRID
+============================ */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.kpi-card {
+  background: var(--card);
+  padding: 28px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.12);
+  transition: 0.25s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 35px rgba(16, 185, 129, 0.27);
+}
+
+.kpi-card h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.value {
+  font-size: 32px;
+  font-weight: 800;
+  margin-top: 6px;
+}
+
+/* ============================
+   ACTIONS SECTION
+============================ */
+.action-section {
+  text-align: left;
+}
+
+.section-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Reuse global UniPay button styling */
+.action-btn {
+  padding: 15px 28px;
+  background: linear-gradient(135deg, var(--green), var(--green-light));
+  border: none;
+  border-radius: 14px;
+  color: #0f172a;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(16,185,129,0.25);
+  transition: 0.25s ease;
+}
+
+.action-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(16,185,129,0.35);
+}
+
+/* ============================
+   RESPONSIVENESS
+============================ */
+@media (max-width: 900px) {
+  .page-title {
+    font-size: 30px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .action-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

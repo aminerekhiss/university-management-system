@@ -1,0 +1,98 @@
+<div class="users-container">
+
+  <h1 class="page-title">Manage Users</h1>
+
+  <!-- Search -->
+  <div class="search-row">
+    <input
+      type="text"
+      placeholder="Search users..."
+      (input)="onSearchChange($any($event.target).value)"
+    />
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading" *ngIf="!(filteredUsers$ | async)">
+    Loading users...
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-wrapper" *ngIf="filteredUsers$ | async as users">
+
+    <table class="users-table">
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th class="action-col"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let u of users">
+          <td>{{ u.fullname }}</td>
+          <td>{{ u.username }}</td>
+          <td>{{ u.email }}</td>
+          <td>{{ u.role | titlecase }}</td>
+
+          <td class="actions">
+            <button class="small-btn" (click)="openEdit(u)">
+              Edit
+            </button>
+
+            <button class="delete-btn" (click)="deleteUser(u.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- EMPTY STATE -->
+    <div class="empty-state" *ngIf="users.length === 0">
+      No users found.
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="overlay" *ngIf="modalOpen">
+    <div class="modal">
+
+      <h2 class="modal-title">Edit User</h2>
+
+      <div class="modal-grid">
+
+        <label>Full Name</label>
+        <input [(ngModel)]="editingUser.fullname" />
+
+        <label>Username</label>
+        <input [(ngModel)]="editingUser.username" />
+
+        <label>Email</label>
+        <input [(ngModel)]="editingUser.email" disabled />
+
+        <label>Role</label>
+        <select [(ngModel)]="editingUser.role">
+          <option value="student">Student</option>
+          <option value="staff">Staff</option>
+          <option value="admin">Admin</option>
+        </select>
+
+      </div>
+
+      <div class="modal-buttons">
+        <button class="primary-btn" (click)="saveChanges()">
+          Save
+        </button>
+
+        <button class="secondary-btn" (click)="closeModal()">
+          Cancel
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,110 @@
+<ng-container *ngIf="state$ | async as state">
+
+  <!-- LOADING -->
+  <div class="profile-page" *ngIf="state.loading">
+    <div class="profile-wrapper">
+      <p class="muted">Loading profile...</p>
+    </div>
+  </div>
+
+  <!-- PROFILE -->
+  <div class="profile-page" *ngIf="!state.loading && state.user">
+
+    <div class="profile-wrapper">
+
+      <!-- LEFT -->
+      <div class="profile-left">
+
+        <div class="avatar-big">
+          <img *ngIf="state.user.profile_image"
+               [src]="state.user.profile_image"
+               alt="Avatar" />
+
+          <span *ngIf="!state.user.profile_image">
+            {{ state.user.fullname?.[0] }}
+          </span>
+        </div>
+
+        <label class="upload-btn">
+          Change Photo
+          <input type="file" accept="image/*" (change)="uploadImage($event)" />
+        </label>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="profile-right">
+
+        <h1 class="profile-title">Profile Information</h1>
+
+        <div class="form-grid">
+
+          <div class="form-item">
+            <label>Full Name</label>
+            <span>{{ state.user.fullname }}</span>
+          </div>
+
+          <div class="form-item">
+            <label>Email</label>
+            <span>{{ state.user.email }}</span>
+          </div>
+
+          <div class="form-item">
+            <label>Username</label>
+            <span>{{ state.user.username }}</span>
+          </div>
+
+          <div class="form-item">
+            <label>Role</label>
+            <span>{{ state.user.role | titlecase }}</span>
+          </div>
+
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="button-row">
+          <button class="danger-btn" (click)="logout()">Logout</button>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="password-box">
+
+          <h3>Change Password</h3>
+
+          <div *ngIf="!changingPassword" class="password-preview">
+            ••••••••••
+            <button class="mini-btn" (click)="changingPassword = true">
+              Change
+            </button>
+          </div>
+
+          <div *ngIf="changingPassword" class="password-fields">
+            <input type="password"
+                   placeholder="Current Password"
+                   [(ngModel)]="passwordForm.current" />
+
+            <input type="password"
+                   placeholder="New Password"
+                   [(ngModel)]="passwordForm.new" />
+
+            <input type="password"
+                   placeholder="Confirm New Password"
+                   [(ngModel)]="passwordForm.confirm" />
+
+            <div class="password-actions">
+              <button class="mini-btn" (click)="savePassword()">Save</button>
+              <button class="mini-btn" (click)="changingPassword = false">
+                Cancel
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</ng-container>

@@ -1,0 +1,72 @@
+<div class="home-container">
+
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-text">
+      <h1 class="hero-title fade-up">
+        Welcome to <span>UniPay</span>
+      </h1>
+
+      <p class="hero-subtitle fade-up" style="animation-delay: .2s">
+        The official university financial management system for students, staff, accountants, and administrators.
+        Access payments, payroll, budgets, and records — all in one secure and modern platform.
+      </p>
+
+      <!-- QUICK ACTIONS -->
+      <div class="hero-actions fade-up" style="animation-delay: .4s">
+        <button class="create-btn" routerLink="/profile">View My Profile</button>
+        <button class="ghost-btn" (click)="goToCreate()">Create an Account</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SYSTEM MODULES -->
+  <section class="features-section">
+    <h2 class="section-title">Core Modules</h2>
+
+    <div class="features-grid">
+      <div class="fcard">
+        <i class="icon">💳</i>
+        <h3>Payments & Fees</h3>
+        <p>Pay tuition and fees, view invoices, and download receipts instantly.</p>
+      </div>
+
+      <div class="fcard">
+        <i class="icon">🧾</i>
+        <h3>Payroll & Staff Finance</h3>
+        <p>Access salary details, deductions, allowances, and monthly reports.</p>
+      </div>
+
+      <div class="fcard">
+        <i class="icon">📊</i>
+        <h3>Budget Analytics</h3>
+        <p>Monitor departmental budgets through live charts and insights.</p>
+      </div>
+
+      <div class="fcard">
+        <i class="icon">👤</i>
+        <h3>User Profiles</h3>
+        <p>Manage personal information and view role-based permissions.</p>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- CTA / LOGIN REDIRECT -->
+  <section class="cta-section">
+    <h2>Access Your Financial Dashboard Now!</h2>
+
+    <button routerLink="/login" class="cta-big-btn">
+      Join UniPay
+    </button>
+  </section>
+
+  <!-- BACKGROUND ORBS -->
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+</div>

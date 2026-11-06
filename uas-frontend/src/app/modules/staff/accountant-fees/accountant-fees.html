@@ -1,0 +1,84 @@
+<div class="fees-container">
+
+  <h1 class="page-title">Manage Student Fees</h1>
+
+  <!-- Search -->
+  <div class="search-row">
+    <input
+      placeholder="Search invoices or students..."
+      (input)="onSearchChange($any($event.target).value)"
+    />
+
+    <button class="add-btn" (click)="openAddModal()">+ Add Invoice</button>
+  </div>
+
+  <!-- LOADING -->
+  <div *ngIf="!(filteredInvoices$ | async)" class="loading">
+    Loading invoices...
+  </div>
+
+  <!-- TABLE -->
+  <table class="fees-table" *ngIf="filteredInvoices$ | async as invoices">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Student</th>
+        <th>Invoice</th>
+        <th>Amount</th>
+        <th>Due</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let inv of invoices">
+        <td>{{ inv.student?.id }}</td>
+        <td>{{ inv.student?.user?.fullname }}</td>
+        <td>{{ inv.name }}</td>
+        <td>{{ inv.amount }} TND</td>
+        <td>{{ inv.due_date }}</td>
+
+        <td>
+          <span [class]="inv.status">{{ inv.status }}</span>
+        </td>
+
+        <td class="actions">
+          <button class = "secondary-btn" (click)="openEditModal(inv)">Edit</button>
+          <button class = "secondary-btn" (click)="toggleStatus(inv)">Toggle</button>
+          <button class="secondary-btn" (click)="downloadInvoice(inv)">Invoice</button>
+          <button class="delete-btn" (click)="deleteInvoice(inv.id)">Delete</button>
+        </td>
+      </tr>
+
+      <tr *ngIf="invoices.length === 0">
+        <td colspan="6" class="empty">No invoices found</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- MODAL -->
+  <div class="overlay" *ngIf="modalOpen">
+    <div class="modal">
+      <h2>{{ editing ? 'Edit Invoice' : 'Add Invoice' }}</h2>
+
+      <label>Student ID</label>
+      <input type="number" [(ngModel)]="form.student_id" />
+
+      <label>Name</label>
+      <input [(ngModel)]="form.name" />
+
+      <label>Amount</label>
+      <input type="number" min="1" [(ngModel)]="form.amount" />
+
+      <label>Due Date</label>
+      <input type="date" [(ngModel)]="form.due_date" />
+
+      <div class="modal-buttons">
+        <button class="primary-btn" (click)="saveInvoice()">Save</button>
+        <button class="secondary-btn" (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+</div>

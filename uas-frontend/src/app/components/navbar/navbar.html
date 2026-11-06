@@ -1,0 +1,91 @@
+<nav class="navbar-wrapper">
+  <div class="navbar-floating">
+    <div class="navbar-inner">
+
+      <!-- Left: Logo -->
+      <div class="nav-left" (click)="goHome()">
+        <span class="logo">UniPay</span>
+      </div>
+
+
+
+      <!-- Right: Dynamic Menu -->
+      <ul class="nav-links" *ngIf="role === 'guest' || !role">
+        <div class="aurora-toggle" (click)="toggleTheme()">
+          <div class="inner"></div>
+        </div>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/login">Login</a></li>
+        <li><a routerLink="/signup">Sign Up</a></li>
+      </ul>
+
+
+      <ul class="nav-links" *ngIf="role === 'student'">
+        <div class="aurora-toggle" (click)="toggleTheme()">
+          <div class="inner"></div>
+        </div>
+
+        <li><a routerLink="/student">Dashboard</a></li>
+        <li><a routerLink="/student/fees">Fees</a></li>
+
+        <!-- profile picture -->
+        <img *ngIf="profileImage"
+            [src]="profileImage"
+            class="nav-profile-pic"
+            (click)="goToProfile()" />
+
+        <div *ngIf="!profileImage"
+            class="profile-fallback"
+            (click)="goToProfile()">
+          {{ currentUser?.fullname[0] || '?' }}
+        </div>
+      </ul>
+
+
+      <ul class="nav-links" *ngIf="role === 'staff'">
+        <div class="aurora-toggle" (click)="toggleTheme()">
+          <div class="inner"></div>
+        </div>
+
+        <li><a routerLink="/staff">Dashboard</a></li>
+        <li><a routerLink="/staff/fees">Fees</a></li>
+        <li><a routerLink="/staff/payroll">Payroll</a></li>
+        <li><a routerLink="/staff/budget">Budgets</a></li>
+
+        <img *ngIf="profileImage"
+            [src]="profileImage"
+            class="nav-profile-pic"
+            (click)="goToProfile()" />
+
+        <div *ngIf="!profileImage"
+            class="profile-fallback"
+            (click)="goToProfile()">
+          {{ currentUser?.fullname[0] || '?' }}
+        </div>
+      </ul>
+
+
+      <ul class="nav-links" *ngIf="role === 'admin'">
+        <div class="aurora-toggle" (click)="toggleTheme()">
+          <div class="inner"></div>
+        </div>
+
+        <li><a routerLink="/admin">Admin Panel</a></li>
+        <li><a routerLink="/admin/users">Users</a></li>
+
+        <img *ngIf="profileImage"
+            [src]="profileImage"
+            class="nav-profile-pic"
+            (click)="goToProfile()" />
+
+        <div *ngIf="!profileImage"
+            class="profile-fallback"
+            (click)="goToProfile()">
+          {{ currentUser?.fullname[0] || '?' }}
+        </div>
+      </ul>
+
+
+    </div><!-- end navbar-inner -->
+  </div><!-- end navbar-floating -->
+</nav>

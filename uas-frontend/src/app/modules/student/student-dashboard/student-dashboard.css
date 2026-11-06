@@ -1,0 +1,338 @@
+/* ===========================
+   PAGE WRAPPER
+=========================== */
+.dashboard-container {
+  padding: 40px;
+  color: var(--text);
+  background: var(--bg);
+  position: relative;
+}
+
+.title {
+  font-size: 38px;
+  font-weight: 800;
+}
+
+.subtitle {
+  margin-top: 5px;
+  color: var(--text-muted);
+  margin-bottom: 30px;
+}
+
+/* ===========================
+   GRID LAYOUT
+=========================== */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 35px;
+}
+
+/* ===========================
+   LEFT SECTION
+=========================== */
+.left-section {
+  display: grid;
+  gap: 20px;
+}
+
+.dash-card {
+  background: var(--card);
+  padding: 22px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  transition: 0.3s ease;
+}
+
+.dash-card.big-card {
+  padding: 28px;
+}
+
+.dash-card:hover {
+  border-color: var(--green);
+  transform: translateY(-4px);
+}
+
+.amount {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--green);
+}
+
+.small-amount {
+  font-size: 24px;
+  color: var(--green-light);
+}
+
+.desc {
+  color: var(--text-muted);
+}
+
+/* clickable cards should look clickable */
+.dash-card.clickable {
+  cursor: pointer;
+}
+
+/* ===========================
+   RIGHT SECTION
+=========================== */
+.right-section h3 {
+  font-size: 22px;
+  margin-bottom: 14px;
+}
+
+.calendar-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+}
+
+.calendar-header {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  gap: 6px;
+}
+
+/* weekday labels */
+.calendar-grid span {
+  color: var(--text-muted);
+  font-size: 13px;
+  padding: 6px 0;
+}
+
+/* empty filler cells (before day 1) */
+.empty {
+  padding: 10px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+/* day cell base */
+.day {
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--card-light);
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.15s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.day:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 255, 170, 0.35);
+}
+
+/* selected day */
+.day.selected {
+  outline: 2px solid var(--green);
+  color: var(--text);
+}
+
+/* ========== Calendar status coloring ==========
+   priority handled in TS by getDayClass(day):
+   overdue > pending > paid
+*/
+.day.paid {
+  border-color: rgba(0, 255, 170, 0.35);
+}
+
+.day.pending {
+  border-color: rgba(255, 200, 0, 0.55);
+}
+
+.day.overdue {
+  border-color: rgba(255, 70, 70, 0.65);
+}
+
+/* keep your original class too (if still used anywhere) */
+.upcoming {
+  background: var(--green);
+  color: #0c1116;
+  font-weight: 700;
+}
+
+/* ===========================
+   PAYMENT / INVOICE INFO BOX
+=========================== */
+.payment-info {
+  margin-top: 20px;
+  background: var(--card);
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
+
+.highlight {
+  font-size: 18px;
+  color: var(--green);
+  font-weight: bold;
+}
+
+.status {
+  margin-top: 6px;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+/* status text colors */
+.status.paid {
+  color: rgba(0, 255, 170, 0.85);
+}
+
+.status.pending {
+  color: rgba(255, 200, 0, 0.9);
+  font-weight: 600;
+}
+
+.status.overdue {
+  color: rgba(255, 70, 70, 0.95);
+  font-weight: 700;
+}
+
+.upcoming-status {
+  color: var(--green);
+}
+
+/* invoice rows inside payment-info */
+.invoice-row {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.invoice-row p {
+  margin: 4px 0;
+}
+
+.loading-screen {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-box {
+  text-align: center;
+  opacity: 0.85;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(255,255,255,0.2);
+  border-top: 4px solid var(--green);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin: 0 auto 12px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===========================
+   ORBS
+=========================== */
+.orb {
+  position: absolute;
+  filter: blur(120px);
+  opacity: 0.25;
+  z-index: -1;
+}
+
+.orb1 {
+  width: 280px;
+  height: 280px;
+  background: var(--green);
+  top: -40px;
+  right: -40px;
+}
+
+.orb2 {
+  width: 240px;
+  height: 240px;
+  background: var(--green-light);
+  bottom: 10%;
+  left: -40px;
+}
+
+/* ===========================
+   RESPONSIVE BREAKPOINTS
+=========================== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .right-section {
+    order: -1; /* Calendar goes above cards */
+  }
+
+  .dash-card.big-card {
+    padding: 24px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 25px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .calendar-grid span,
+  .calendar-grid .day,
+  .calendar-grid .empty {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .calendar-grid {
+    gap: 4px;
+  }
+
+  .dash-card {
+    padding: 18px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 520px) {
+  .calendar-grid {
+    grid-template-columns: repeat(7, minmax(18px, 1fr));
+  }
+
+  .calendar-grid span {
+    font-size: 11px;
+  }
+
+  .day,
+  .empty {
+    padding: 6px;
+    font-size: 11px;
+  }
+
+  .highlight {
+    font-size: 16px;
+  }
+}

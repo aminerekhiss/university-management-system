@@ -1,0 +1,54 @@
+<div class="accountant-container">
+
+  <h1 class="page-title">Accountant Dashboard</h1>
+
+  <!-- LOADING -->
+  <div *ngIf="!(dashboard$ | async)" class="loading">
+    Loading financial overview...
+  </div>
+
+  <!-- DASHBOARD -->
+  <ng-container *ngIf="dashboard$ | async as data">
+
+    <div class="kpi-grid">
+
+      <div class="kpi-card">
+        <h4>Total Collected</h4>
+        <p class="value">{{ data.totalCollected | currency:'TND ' }}</p>
+      </div>
+
+      <div class="kpi-card">
+        <h4>Outstanding Fees</h4>
+        <p class="value">{{ data.outstanding | currency:'TND ' }}</p>
+      </div>
+
+      <div class="kpi-card">
+        <h4>Monthly Payroll</h4>
+        <p class="value">{{ data.monthlyPayroll | currency:'TND ' }}</p>
+      </div>
+
+    </div>
+
+    <div class="action-section">
+
+      <h2 class="section-title">Manage Financial Operations</h2>
+
+      <div class="action-buttons">
+        <button class="action-btn" routerLink="/staff/fees">
+          Manage Student Fees
+        </button>
+
+        <button class="action-btn" routerLink="/staff/payroll">
+          Manage Payroll
+        </button>
+
+        <button class="action-btn" routerLink="/staff/budget">
+          Department Budget
+        </button>
+      </div>
+
+    </div>
+
+  </ng-container>
+
+</div>

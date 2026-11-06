@@ -1,0 +1,13 @@
+# Frontend ignores
+uas-frontend/node_modules
+uas-frontend/dist
+
+# Backend ignores
+uas-backend/vendor
+uas-backend/node_modules
+uas-backend/storage
+uas-backend/.env
+
+# OS / Editor files
+.DS_Store
+.vscode

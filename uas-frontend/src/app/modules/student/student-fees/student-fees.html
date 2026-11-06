@@ -1,0 +1,124 @@
+<ng-container *ngIf="state$ | async as state">
+
+  <!-- LOADING -->
+  <div class="loading" *ngIf="state.loading">
+    Loading your fees...
+  </div>
+
+  <!-- PAGE -->
+  <div class="fees-container" *ngIf="!state.loading">
+
+    <h1 class="title">Student Fees</h1>
+
+    <!-- Search -->
+    <input
+      type="text"
+      class="search-box"
+      placeholder="Search invoices..."
+      [(ngModel)]="searchText"
+    />
+
+    <!-- INVOICES -->
+    <section class="card-section">
+      <h2>Invoices</h2>
+
+      <table class="fees-table">
+        <thead>
+          <tr>
+            <th>Invoice</th>
+            <th>Due Date</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let inv of filterInvoices(state.invoices)">
+            <td>{{ inv.name }}</td>
+            <td>{{ inv.due_date }}</td>
+            <td>{{ inv.amount }} TND</td>
+
+            <td>
+              <span class="badge" [ngClass]="inv.status">
+                {{ inv.status }}
+              </span>
+            </td>
+
+            <td class="actions">
+              <button
+                *ngIf="inv.status !== 'paid'"
+                class="pay-btn"
+                (click)="openPayModal(inv)"
+              >
+                Pay Now
+              </button>
+
+              <button class="download-btn" (click)="downloadInvoice(inv)">
+                Download
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- PAYMENTS -->
+    <section class="card-section">
+      <h2>Payment History</h2>
+
+      <table class="fees-table" *ngIf="state.payments.length; else noPayments">
+        <thead>
+          <tr>
+            <th>Amount</th>
+            <th>Method</th>
+            <th>Reference</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let p of state.payments">
+            <td>{{ p.amount }} TND</td>
+            <td>{{ p.method }}</td>
+            <td>{{ p.transaction_ref }}</td>
+            <td>{{ p.created_at | date }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ng-template #noPayments>
+        <p class="muted">No payments yet.</p>
+      </ng-template>
+    </section>
+
+  </div>
+
+</ng-container>
+
+<!-- MODAL -->
+<div class="modal-backdrop" *ngIf="modalOpen" (click)="closeModal()"></div>
+
+<div class="payment-modal" *ngIf="modalOpen">
+  <h3>Pay {{ selectedInvoice?.name }}</h3>
+  <p class="modal-amount">{{ selectedInvoice?.amount }} TND</p>
+
+  <label>Cardholder Name</label>
+  <input [(ngModel)]="cardName" />
+
+  <label>Card Number</label>
+  <input [(ngModel)]="cardNumber" />
+
+  <label>CVV</label>
+  <input [(ngModel)]="cardCVV" />
+
+  <button
+    class="confirm-btn"
+    [disabled]="!isCardValid() || paying"
+    (click)="confirmPayment()"
+  >
+    {{ paying ? 'Processing...' : 'Confirm Payment' }}
+  </button>
+
+  <button class="close-btn" (click)="closeModal()">Cancel</button>
+</div>

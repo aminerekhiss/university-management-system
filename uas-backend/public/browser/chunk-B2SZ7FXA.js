@@ -1,0 +1,1 @@
+import"./chunk-C6Q5SG76.js";var t=[{path:"",loadComponent:()=>import("./chunk-EGZDOAVP.js").then(o=>o.AdminDashboard)},{path:"users",loadComponent:()=>import("./chunk-IKT7FAHX.js").then(o=>o.ManageUsers)}];export{t as ADMIN_ROUTES};

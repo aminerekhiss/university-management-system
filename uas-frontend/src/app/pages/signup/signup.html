@@ -1,0 +1,118 @@
+<div class="signup-container">
+
+  <!-- LEFT SIDE -->
+  <div class="left-panel">
+    <h1>Join <span>UniPay</span></h1>
+    <p>
+      Create your secure financial account to access university payments,
+      payroll, fees, budgets, and more.
+    </p>
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="right-panel">
+
+    <!-- STEP 1 — ROLE SELECTION -->
+    <div *ngIf="step === 1" class="role-card">
+      <h2>Select Account Type</h2>
+      <p class="role-desc">Choose your account type to continue</p>
+
+      <div class="role-buttons">
+        <button class="role-btn" (click)="chooseRole('student')">Student</button>
+        <button class="role-btn" (click)="chooseRole('staff')">Staff</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 — SIGNUP FORM -->
+    <form *ngIf="step === 2" class="signup-form" [formGroup]="form" (ngSubmit)="submit()">
+
+      <!-- PROFILE IMAGE -->
+      <div class="upload-section">
+
+        <!-- CLICKABLE UPLOAD CIRCLE -->
+        <label class="upload-circle">
+
+          <!-- Image Preview -->
+          <img *ngIf="profileImage" [src]="profileImage" alt="Profile" />
+
+          <!-- + icon when no image -->
+          <span *ngIf="!profileImage" class="plus-icon">+</span>
+
+          <!-- Hidden File Input (WORKS because it's inside the label) -->
+          <input type="file" accept="image/*" class="hidden-file" (change)="uploadImage($event)" />
+
+        </label>
+
+      </div>
+
+
+      <!-- FORM FIELDS -->
+      <div class="form-group">
+        <label>Full Name</label>
+        <input formControlName="fullname" />
+      </div>
+
+      <div class="form-group">
+        <label>Username</label>
+        <input formControlName="username" />
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" formControlName="email" />
+        <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="error-text">
+          <small>Valid email is required</small>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="selectedRole === 'student'">
+        <label>University ID</label>
+        <input formControlName="universityId" />
+      </div>
+
+      <div class="form-group" *ngIf="selectedRole === 'staff'">
+        <label>Staff ID</label>
+        <input formControlName="staffId" />
+      </div>
+
+      <div class="form-group" *ngIf="selectedRole === 'student'">
+        <label>Program</label>
+        <input type="text" formControlName="program" placeholder="e.g. Computer Science" />
+      </div>
+
+      <div class="form-group" *ngIf="selectedRole === 'student'">
+        <label>Level / Year</label>
+        <input type="text" formControlName="level" placeholder="e.g. Year 2" />
+      </div>
+
+
+
+
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" formControlName="password" />
+        <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="error-text">
+          <small>Min 6 chars required</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" formControlName="confirmPassword" />
+        <div *ngIf="form.errors?.['mismatch'] && form.get('confirmPassword')?.touched" class="error-text">
+          <small>Passwords do not match</small>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="form.invalid">Sign Up</button>
+
+    </form>
+
+  </div>
+
+  <!-- ORBS -->
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+</div>

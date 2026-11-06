@@ -1,0 +1,263 @@
+/* ============================= */
+/* PAGE CONTAINER */
+/* ============================= */
+.fees-container {
+  padding: 40px;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ============================= */
+/* TITLE */
+/* ============================= */
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 25px;
+  padding: 10px;
+  background: linear-gradient(90deg, var(--green), var(--green-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ============================= */
+/* SEARCH BOX */
+/* ============================= */
+.search-box {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 25px;
+  border-radius: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+/* ============================= */
+/* CARD SECTIONS */
+/* ============================= */
+.card-section {
+  background: var(--card);
+  padding: 25px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  margin-bottom: 35px;
+  overflow-x: auto; /* ✅ table safety */
+}
+
+.card-section h2 {
+  margin-bottom: 15px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* ============================= */
+/* TABLE */
+/* ============================= */
+.fees-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 620px; /* ✅ forces scroll instead of squeeze */
+}
+
+.fees-table th,
+.fees-table td {
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.fees-table th {
+  color: var(--green);
+  font-weight: 700;
+}
+
+/* ============================= */
+/* STATUS BADGE */
+/* ============================= */
+.badge {
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 13px;
+  background: #f59e0b;
+  color: #000;
+}
+
+.badge.paid {
+  background: var(--green);
+  color: var(--bg);
+}
+
+.badge.pending {
+  background: #f59e0b;
+}
+
+.badge.overdue {
+  background: #ef4444;
+  color: #fff;
+}
+
+/* ============================= */
+/* ACTIONS */
+/* ============================= */
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.pay-btn {
+  background: var(--green);
+  color: var(--bg);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.download-btn {
+  background: transparent;
+  border: 1px solid var(--green);
+  color: var(--green);
+  padding: 7px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.muted {
+  opacity: 0.6;
+}
+
+/* ============================= */
+/* MODAL */
+/* ============================= */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(4px);
+  z-index: 9000;
+}
+
+.payment-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  max-width: 92%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 25px;
+  border-radius: 18px;
+  z-index: 9999;
+}
+
+.payment-modal h3 {
+  font-size: 22px;
+  margin-bottom: 5px;
+  color: var(--text);
+}
+
+.modal-amount {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--green);
+  margin-bottom: 20px;
+}
+
+.payment-modal input {
+  width: 100%;
+  background: var(--bg);
+  color: var(--text);
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  margin-bottom: 15px;
+}
+
+.payment-modal input::placeholder {
+  color: var(--text-muted);
+}
+.payment-modal label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+  color: var(--text);
+}
+
+.confirm-btn,
+.close-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.confirm-btn {
+  background: var(--green);
+  color: var(--bg);
+  border: none;
+}
+
+.close-btn {
+  background: transparent;
+  border: 1px solid var(--green);
+  color: var(--green);
+  margin-top: 10px;
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+/* Tablets */
+@media (max-width: 900px) {
+  .fees-container {
+    padding: 24px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  .card-section {
+    padding: 18px;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pay-btn,
+  .download-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Small phones */
+@media (max-width: 420px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .payment-modal {
+    padding: 18px;
+  }
+}

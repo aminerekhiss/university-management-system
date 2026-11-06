@@ -1,0 +1,23 @@
+<div class="global-orb orb1"></div>
+<div class="global-orb orb2"></div>
+<div class="global-orb orb3"></div>
+
+<app-navbar></app-navbar>
+
+<router-outlet></router-outlet>
+
+<app-footer></app-footer>
+
+<!-- ⬇⬇⬇ COOKIE BANNER GOES HERE -->
+<div class="cookie-banner" *ngIf="showCookieBanner">
+  <div class="cookie-banner__content">
+    <p>
+      We use cookies to improve your UniPay experience.
+    </p>
+    <div class="cookie-banner__actions">
+      <button (click)="acceptCookies()">Accept</button>
+      <button class="secondary" (click)="rejectCookies()">Later</button>
+    </div>
+  </div>
+</div>
+<app-toast></app-toast>

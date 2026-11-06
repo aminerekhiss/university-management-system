@@ -1,0 +1,243 @@
+.profile-page {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: var(--bg);
+  color: var(--text);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+
+}
+
+/* MAIN WRAPPER */
+.profile-wrapper {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  gap: 50px;
+  padding: 40px;
+  background: var(--card);
+  border-radius: 30px;
+  border: 1px solid var(--border);
+  box-shadow: 0 0 40px rgba(16,185,129,0.18);
+  flex-wrap: nowrap;
+  position: relative;
+  z-index: 5;
+}
+
+/* LEFT SIDE */
+.profile-left {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* BIG AVATAR */
+.avatar-big {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green), var(--green-light));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 80px;
+  color: var(--bg);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+/* UPLOAD BUTTON */
+.upload-btn {
+  color: var(--green);
+  border: 1px solid var(--green);
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.upload-btn:hover { filter: brightness(1.1); }
+.upload-btn input { display: none; }
+
+/* RIGHT SIDE */
+.profile-right {
+  flex: 1;
+}
+
+.profile-title {
+  font-size: 34px;
+  margin-bottom: 25px;
+}
+
+/* FORM GRID */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.form-item label {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.form-item span {
+  display: block;
+  margin-top: 5px;
+  font-size: 18px;
+  color: var(--text);
+}
+
+.form-item input {
+  width: 100%;
+  margin-top: 6px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 12px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+/* BUTTON ROW */
+.button-row {
+  margin-top: 35px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.prim-btn,
+.secondary-btn,
+.danger-btn {
+  flex: 1;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+/* Fix your button styling */
+.prim-btn {
+  background: transparent;
+  border: 1px solid var(--green);
+  color: var(--green);
+}
+.danger-btn {
+  background: transparent;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+}
+.secondary-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+/* PASSWORD BOX */
+.password-box {
+  margin-top: 40px;
+  padding: 22px;
+  border-radius: 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.password-preview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.password-fields input {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px;
+  margin-bottom: 10px;
+  background: var(--input-bg);
+  color: var(--text);
+}
+
+.mini-btn {
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--green);
+  color: var(--green);
+}
+
+.mini-btn:hover {
+  background: rgba(16,185,129,0.15);
+}
+
+/* ORBS */
+.orb {
+  position:absolute;
+  border-radius:50%;
+  filter:blur(100px);
+  opacity:0.25;
+  z-index: 0;
+}
+.orb1{width:300px;height:300px;background:var(--green);top:-40px;right:-40px;}
+.orb2{width:260px;height:260px;background:var(--green-light);bottom:10%;left:-40px;}
+.orb3{width:220px;height:220px;background:#14b8a6;bottom:25%;right:10%;}
+
+/* ====================== */
+/* RESPONSIVE FIXES      */
+/* ====================== */
+
+/* Tablet & below */
+@media (max-width: 1100px) {
+  .profile-wrapper {
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+  }
+
+  .profile-left {
+    width: 100%;
+    align-items: center;
+  }
+
+  .profile-right {
+    width: 100%;
+  }
+
+  .button-row {
+    flex-direction: column;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .profile-page {
+    padding: 20px;
+  }
+
+  .profile-wrapper {
+    padding: 20px;
+    gap: 30px;
+  }
+
+  .avatar-big {
+    width: 150px;
+    height: 150px;
+    font-size: 60px;
+  }
+
+  .profile-title {
+    font-size: 26px;
+  }
+
+  .button-row button {
+    font-size: 15px;
+    padding: 12px;
+  }
+}

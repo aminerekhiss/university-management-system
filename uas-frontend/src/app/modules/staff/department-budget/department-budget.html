@@ -1,0 +1,166 @@
+<div class="budget-container">
+
+  <h1 class="page-title">Department Budget</h1>
+
+  <!-- BUDGET SELECT -->
+  <div *ngIf="budgets$ | async as budgets">
+    <select
+      class="department-select"
+      [(ngModel)]="selectedBudgetIndex"
+      (ngModelChange)="onBudgetChange($event)">
+      <option *ngFor="let b of budgets; let i = index" [value]="i">
+        {{ b.department.name }}
+      </option>
+    </select>
+  </div>
+
+  <!-- LOADING -->
+  <div *ngIf="!(report$ | async)" class="loading">
+    Loading budget report...
+  </div>
+
+  <!-- REPORT -->
+  <ng-container *ngIf="report$ | async as report">
+
+    <!-- KPIs -->
+    <div class="stats-row">
+      <div class="stat income">Income: {{ report.totalIncome }} TND</div>
+      <div class="stat expense">Expenses: {{ report.totalExpenses }} TND</div>
+      <div class="stat balance">Net: {{ report.netBalance }} TND</div>
+    </div>
+    <div class="stats-row">
+  <div class="stat income">
+    Allocated: {{ report.allocated | number }} TND
+  </div>
+
+      <div class="stat expense">
+        Budget Spent: {{ report.spent | number }} TND
+      </div>
+
+      <div class="stat balance">
+        Budget Remaining: {{ report.remaining | number }} TND
+      </div>
+    </div>
+
+    <!-- CHARTS -->
+    <div class="chart-grid">
+
+      <div class="chart-card">
+        <h3>Income vs Expenses</h3>
+        <ngx-charts-pie-chart
+          [results]="report.pieData"
+          [labels]="true"
+          [doughnut]="true"
+          [scheme]="colorScheme">
+        </ngx-charts-pie-chart>
+      </div>
+
+      <div class="chart-card">
+        <h3>Monthly Net Balance</h3>
+        <ngx-charts-bar-vertical
+          [results]="report.barData"
+          [scheme]="colorScheme"
+          [xAxis]="true"
+          [yAxis]="true"
+          xAxisLabel="Month"
+          yAxisLabel="Net TND">
+        </ngx-charts-bar-vertical>
+      </div>
+
+    </div>
+
+    <!-- ACTIONS -->
+   <div class="top-actions">
+      <button class="add-btn" (click)="openAddModal()">+ Add Transaction</button>
+      <button class="secondary-btn" (click)="openCreateBudget()">+ Create Budget</button>
+      <button class="secondary-btn" (click)="exportReport(report)">Export</button>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-wrapper">
+      <table class="budget-table">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let t of report.transactions">
+            <td class = "type" [class.income]="t.type === 'Income'"
+                [class.expense]="t.type === 'Expense'">
+              {{ t.type }}
+            </td>
+            <td>{{ t.description }}</td>
+            <td>{{ t.amount }} TND</td>
+            <td>{{ t.transaction_date }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- MODAL -->
+    <div class="overlay" *ngIf="modalOpen">
+      <div class="modal">
+        <h2>Add Transaction</h2>
+
+        <label>Type</label>
+        <select [(ngModel)]="form.type">
+          <option>Income</option>
+          <option>Expense</option>
+        </select>
+
+        <label>Description</label>
+        <input [(ngModel)]="form.description">
+
+        <label>Amount</label>
+        <input type="number" min="1" [(ngModel)]="form.amount">
+
+        <label>Date</label>
+        <input type="date" [(ngModel)]="form.transaction_date">
+
+        <button class="primary-btn" (click)="saveTransaction(report)">Save</button>
+        <button class="secondary-btn" (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
+    <!-- CREATE BUDGET MODAL -->
+<!-- CREATE BUDGET MODAL -->
+<div class="overlay" *ngIf="createBudgetOpen">
+  <div class="modal">
+    <h2>Create Budget</h2>
+
+    <label>Department</label>
+    <select [(ngModel)]="createBudgetForm.department_id">
+      <option [ngValue]="null">Select department</option>
+      <option *ngFor="let d of (departments$ | async)" [ngValue]="d.id">
+        {{ d.name }}
+      </option>
+    </select>
+
+    <label>Fiscal Year</label>
+    <input
+      type="number"
+      min="2000"
+      [(ngModel)]="createBudgetForm.fiscal_year"
+    />
+
+    <label>Allocated Amount</label>
+    <input
+      type="number"
+      min="1"
+      [(ngModel)]="createBudgetForm.allocated_amount"
+    />
+
+    <button class="primary-btn" (click)="saveBudget()">Create</button>
+    <button class="secondary-btn" (click)="closeCreateBudget()">Cancel</button>
+  </div>
+</div>
+
+
+
+  </ng-container>
+
+</div>

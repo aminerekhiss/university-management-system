@@ -1,0 +1,109 @@
+<div class="payroll-container">
+
+  <h1 class="page-title">Staff Payroll Management</h1>
+
+  <!-- SEARCH & ACTIONS -->
+  <div class="search-row">
+    <input
+      type="text"
+      placeholder="Search staff or month..."
+      [(ngModel)]="searchText"
+      (input)="onSearchChange()"
+    />
+
+    <button class="add-btn" (click)="openAddModal()">+ Add Payroll</button>
+
+    <input
+      type="number"
+      placeholder="Month (1–12)"
+      min="1"
+      max="12"
+      [(ngModel)]="reportMonth"
+    />
+
+    <input
+      type="number"
+      placeholder="Year (e.g. 2025)"
+      [(ngModel)]="reportYear"
+    />
+
+    <button class="report-btn" (click)="generateMonthlyReport()">
+      Export Monthly Report
+    </button>
+  </div>
+
+  <!-- LOADING -->
+  <div *ngIf="!(filteredPayroll$ | async)" class="loading">
+    Loading payroll data...
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-wrapper" *ngIf="filteredPayroll$ | async as payroll">
+    <table class="payroll-table">
+      <thead>
+        <tr>
+          <th>Staff Name</th>
+          <th>Base Salary</th>
+          <th>Allowances</th>
+          <th>Deductions</th>
+          <th>Net Salary</th>
+          <th>Month</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let p of payroll">
+          <td>{{ p.staff?.user?.fullname }}</td>
+          <td>{{ p.basic_salary | currency }}</td>
+          <td>{{ p.allowances | currency }}</td>
+          <td>{{ p.deductions | currency }}</td>
+          <td class="net">{{ p.net_salary | currency }}</td>
+          <td>{{ p.month }}/{{ p.year }}</td>
+
+          <td class="actions">
+            <button class="small-btn" (click)="openEditModal(p)">Edit</button>
+            <button class="delete-btn" (click)="deleteRecord(p.id)">Delete</button>
+          </td>
+        </tr>
+
+        <tr *ngIf="payroll.length === 0">
+          <td colspan="7" class="empty">No payroll records found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MODAL -->
+  <div class="overlay" *ngIf="modalOpen">
+    <div class="modal">
+
+      <h2>{{ editing ? 'Edit Payroll Record' : 'Add Payroll Record' }}</h2>
+
+      <label>Staff Member ID</label>
+      <input type="number" [(ngModel)]="staffId" />
+
+      <label>Base Salary</label>
+      <input type="number" [(ngModel)]="baseSalary" />
+
+      <label>Allowances</label>
+      <input type="number" [(ngModel)]="allowances" />
+
+      <label>Deductions</label>
+      <input type="number" [(ngModel)]="deductions" />
+
+      <label>Month</label>
+      <input type="number" min="1" max="12" [(ngModel)]="month" />
+
+      <label>Year</label>
+      <input type="number" [(ngModel)]="year" />
+
+      <div class="modal-buttons">
+        <button class="primary-btn" (click)="saveRecord()">Save</button>
+        <button class="secondary-btn" (click)="closeModal()">Cancel</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

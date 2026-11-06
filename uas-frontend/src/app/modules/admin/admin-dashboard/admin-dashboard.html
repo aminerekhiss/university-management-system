@@ -1,0 +1,46 @@
+<div class="admin-container">
+
+  <h1 class="page-title">Admin Dashboard</h1>
+
+  <!-- LOADING -->
+ 
+  <div class="loading" *ngIf="!(dashboard$ | async)">
+    <div class="loading-box">
+      <div class="spinner"></div>
+      <p>Loading your dashboard...</p>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <ng-container *ngIf="dashboard$ | async as data">
+
+    <!-- KPI ROW -->
+    <div class="kpi-grid">
+
+      <div class="kpi-card">
+        <label>Total Users</label>
+        <h2>{{ data.totalUsers }}</h2>
+      </div>
+
+      <div class="kpi-card">
+        <label>Total Students</label>
+        <h2>{{ data.totalStudents }}</h2>
+      </div>
+
+      <div class="kpi-card">
+        <label>Total Staff</label>
+        <h2>{{ data.totalStaff }}</h2>
+      </div>
+
+    </div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="actions-row">
+      <button class="action-btn" routerLink="/admin/users">
+        Manage Users
+      </button>
+    </div>
+
+  </ng-container>
+
+</div>

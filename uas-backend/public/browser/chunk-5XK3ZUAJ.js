@@ -1,0 +1,1 @@
+import"./chunk-C6Q5SG76.js";var o=[{path:"",loadComponent:()=>import("./chunk-FD43T6S7.js").then(t=>t.StudentDashboard)},{path:"fees",loadComponent:()=>import("./chunk-ZAR2DUY4.js").then(t=>t.StudentFees)}];export{o as STUDENT_ROUTES};

@@ -1,0 +1,91 @@
+<ng-container *ngIf="state$ | async as state">
+
+  <!-- 🔄 FULL LOADING SCREEN -->
+  <div class="dashboard-container loading-screen" *ngIf="state.loading">
+    <div class="loading-box">
+      <div class="spinner"></div>
+      <p>Loading your dashboard...</p>
+    </div>
+  </div>
+
+  <!-- ✅ DASHBOARD CONTENT -->
+  <div class="dashboard-container" *ngIf="!state.loading">
+
+    <h1 class="title">Welcome, {{ state.user?.fullname }}</h1>
+
+    <div class="dashboard-grid">
+
+      <!-- LEFT -->
+      <div class="left-section">
+
+        <div class="dash-card big-card">
+          <h3>Total Tuition Due</h3>
+          <p class="amount">TND {{ state.totalDue }}</p>
+        </div>
+
+        <div class="dash-card clickable" (click)="goToFees()">
+          <h3>Pending Invoices</h3>
+          <p class="small-amount">{{ state.pendingCount }}</p>
+        </div>
+
+        <div class="dash-card clickable" (click)="goToFees()">
+          <h3>Overdue Invoices</h3>
+          <p class="small-amount">{{ state.overdueCount }}</p>
+        </div>
+
+        <div class="dash-card clickable" (click)="goToFees()">
+          <h3>Payments History</h3>
+          <p class="small-amount">Click to view</p>
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="right-section">
+
+        <h3>Installment Calendar</h3>
+
+        <div class="calendar-box">
+          <div class="calendar-header">
+            {{ state.currentMonthName }} {{ state.currentYear }}
+          </div>
+
+          <div class="calendar-grid">
+            <span>Sun</span><span>Mon</span><span>Tue</span>
+            <span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+
+            <div class="empty" *ngFor="let _ of state.leadingEmptyDays"></div>
+
+            <div
+              class="day"
+              *ngFor="let day of state.daysInMonth"
+              [ngClass]="getDayClass(day, state.invoicesByDay)"
+              (click)="onDayClick(day, state.invoicesByDay)">
+              {{ day }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Selected Day -->
+        <div class="payment-info" *ngIf="selectedDay !== null">
+          <p><strong>Invoices on {{ selectedDay }}</strong></p>
+
+          <div *ngFor="let inv of selectedDayInvoices">
+            <p>{{ inv.name }} — TND {{ inv.amount }}</p>
+            <p class="status" [ngClass]="inv.status">{{ inv.status }}</p>
+          </div>
+        </div>
+
+        <!-- Next installment -->
+        <div class="payment-info" *ngIf="state.nextInstallment">
+          <p><strong>Next Installment</strong></p>
+          <p>TND {{ state.nextInstallment.amount }}</p>
+          <p>{{ state.nextInstallment.due_date }}</p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</ng-container>

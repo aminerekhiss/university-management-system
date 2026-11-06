@@ -1,0 +1,252 @@
+/* ================================ */
+/* PAGE WRAPPER */
+/* ================================ */
+.budget-container {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  color: var(--text) !important;
+}
+
+/* ================================ */
+/* KPI CARDS */
+/* ================================ */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.stat {
+  padding: 22px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  font-weight: 600;
+  box-shadow: 0 0 20px rgba(16,185,129,0.08);
+}
+
+.stat.income { border-left: 5px solid var(--green); }
+.stat.expense { border-left: 5px solid #ef4444; }
+.stat.balance { border-left: 5px solid var(--green-light); }
+
+/* ================================ */
+/* TOP ACTIONS */
+/* ================================ */
+.top-actions {
+  display: flex;
+  flex-wrap: wrap;        /* Allow wrapping */
+  gap: 15px;
+  align-items: center;
+}
+
+.top-actions input {
+  flex: 1 1 220px;
+  padding: 12px;
+  min-width: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+}
+.add-btn,
+.export-btn {
+  background: linear-gradient(135deg, var(--green), var(--green-light));
+  flex: 0 0 auto;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: none;
+  color: #0c1116;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.add-btn:hover,
+.export-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(16,185,129,0.35);
+}
+
+/* ================================ */
+/* CHART GRID */
+/* ================================ */
+.chart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+/* Card container */
+.chart-card {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.chart-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Fix chart scaling — FULL WIDTH, AUTO HEIGHT */
+.chart-card ngx-charts-pie-chart,
+.chart-card ngx-charts-bar-vertical {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* GLOBAL CHART TEXT FIX */
+.chart-card text {
+  fill: var(--text) !important;
+  font-family: "Inter", sans-serif !important;
+}
+
+.chart-card .legend-label-text {
+  fill: var(--text) !important;
+}
+
+.chart-card .legend-title {
+  fill: var(--text) !important;
+}
+
+.chart-card .gridline-path {
+  stroke: var(--border) !important;
+  opacity: 0.4;
+}
+
+/* ================================ */
+/* TABLE */
+/* ================================ */
+.table-wrapper {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+  overflow: hidden;
+}
+
+.budget-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.budget-table th,
+.budget-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.budget-table th {
+  color: var(--text-muted);
+  text-align: left;
+  background: rgba(255,255,255,0.03);
+}
+
+.type.income { color: var(--green); font-weight: 700; }
+.type.expense { color: #ef4444; font-weight: 700; }
+
+/* ================================ */
+/* BUTTONS */
+/* ================================ */
+.primary-btn {
+  padding: 10px 18px;
+  background: linear-gradient(135deg, var(--green), var(--green-light));
+  color: #0c1116;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.secondary-btn {
+  padding: 10px 18px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.delete-btn {
+  padding: 8px 14px;
+  background: #ef4444;
+  color: #fff;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+.department-select {
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+/* ================================ */
+/* MODAL */
+/* ================================ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.modal {
+  width: 420px;
+  background: var(--card);
+  padding: 28px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  
+}
+
+.modal input,
+.modal select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  margin-bottom: 15px;
+}
+
+/* ================================ */
+/* RESPONSIVE */
+/* ================================ */
+
+@media (max-width: 900px) {
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-card {
+    min-height: 200px; /* reduce height for phones */
+  }
+}

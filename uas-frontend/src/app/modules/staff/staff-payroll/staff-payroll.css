@@ -1,0 +1,207 @@
+/* ===========================
+   PAGE WRAPPER
+=========================== */
+.payroll-container {
+  padding: 40px;
+  color: var(--text);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ===========================
+   TITLE
+=========================== */
+.page-title {
+  margin-bottom: 25px;
+}
+
+/* ===========================
+   SEARCH + BUTTONS ROW
+=========================== */
+.search-row {
+  display: flex;
+  flex-wrap: wrap;               /* IMPORTANT: responsive wrapping */
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.search-row input {
+  flex: 1;               /* Grows but also shrinks on mobile */
+  min-width: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+}
+
+.add-btn,
+.report-btn {
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  white-space: nowrap;           /* Prevent text break */
+}
+
+.add-btn {
+  background: linear-gradient(135deg, var(--green), var(--green-light));
+  color: #0c1116;
+}
+
+.report-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+/* ===========================
+   TABLE
+=========================== */
+.table-wrapper {
+  overflow-x: auto;              /* Allow mobile scrolling */
+}
+
+.payroll-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+}
+
+.payroll-table th,
+.payroll-table td {
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.payroll-table th {
+  text-align: left;
+  background: var(--card);
+  color: var(--text-muted);
+}
+
+.net {
+  font-weight: 700;
+  color: var(--green);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+.small-btn {
+  padding: 6px 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.small-btn:hover {
+  border-color: var(--green);
+}
+
+.delete-btn {
+  padding: 8px 14px;
+  background: #ef4444;
+  color: white;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+/* ===========================
+   MODAL
+=========================== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+}
+
+.modal {
+  width: 420px;
+  background: var(--card);
+  padding: 30px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  max-width: 95%;               /* Prevent overflow on small screens */
+}
+
+.modal input,
+.modal select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.modal-grid {
+  display: grid;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* ===========================
+   PRIMARY / SECONDARY BUTTONS
+=========================== */
+.primary-btn {
+  padding: 10px 18px;
+  background: linear-gradient(135deg, var(--green), var(--green-light));
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  color: #0c1116;
+}
+
+.secondary-btn {
+  padding: 10px 18px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 10px;
+}
+
+/* ===========================
+   RESPONSIVE BREAKPOINTS
+=========================== */
+@media (max-width: 768px) {
+  .search-row {
+    flex-direction: column;
+  }
+
+  .add-btn,
+  .report-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+}
